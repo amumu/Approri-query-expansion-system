@@ -1,6 +1,6 @@
 #encoding=utf-8
 import jieba, re, string
-testDict = "C:/dataset/dict/dict.txt.big"jieba.load_userdict(testDict)
+testDict = "dict/dict.txt.big"jieba.load_userdict(testDict)
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 #jieba.set_dictionary(testDict)

@@ -1,117 +1,82 @@
-﻿#! /usr/local/bin/python3
+﻿# Aprori-based query expansion: controller1.py
+#
+# 
+# Author: Paul Yang <paulyang0125@gmail.com>
+# URL: 
+# For license information, see LICENSE.TXT
+#encoding=utf-8
 import cgitb
 cgitb.enable()
-import sys
+import submodule_load
 import cgi 
 import urllib
 import sql_webModel
-import os, sys, inspect
-# realpath() with make your script run, even if you symlink it :)
-cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
-if cmd_folder not in sys.path:
-	sys.path.insert(0, cmd_folder)
-# use this if you want to include modules from a subforder
-cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"subfolder")))
-if cmd_subfolder not in sys.path:
-	sys.path.insert(0, cmd_subfolder)
-
 import yate
-import markup
+import myquerypaser
+import logging
 
-####################SINGLE QUERY ##########################################
-def jsonPaserForOnePage(each_json):
-	titles = []
-	contents = []
-	urls = []
-	####### each JSON means each page result in a JSON 
-	for result in each_json['responseData']['results']:
-		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
-		titles.append(temp_title)
-		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
-		contents.append(temp_content)
-		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
-		urls.append(temp_url)
-	return titles, contents, urls
-	
-def each_jsonPaser(each_json):
-	all_result = []
-	for result in each_json['responseData']['results']:
-		each_result = []
-		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
-		each_result.append(temp_title)
-		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
-		each_result.append(temp_content)
-		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
-		each_result.append(temp_url)
-		all_result.append(each_result)
-	return all_result
-	
-def each_jsonPaserUsingDic(each_json):
-	all_result = {}
-	for result in each_json['responseData']['results']:
-		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
-		all_result['title'] = temp_title
-		each_result.append(temp_title)
-		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
-		each_result.append(temp_content)
-		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
-		each_result.append(temp_url)
-		all_result.append(each_result)
-	return all_result
-	
+########### global ############  ##TODO: use ConfigParser to move them to *.ini
+LOG_PATH = 'logs/server_info.log'
+LOG_LEVEL = logging.DEBUG
+LOG_FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+FILE_SQLITE = 'final.sqlite'
+DATAINSTORE = True 
 
-##### global paratermters #######
-
-myDB = 'final.sqlite'
-dataInStore = True 
+########### logging init ############
+print "initializing the logging" 
+logger = logging.getLogger('myapp')
+hdlr = logging.FileHandler(LOG_PATH)
+hdlr.setFormatter(LOG_FORMATTER)
+logger.addHandler(hdlr) 
+logger.setLevel(LOG_LEVEL)
+logger.info('controller1.py started')
 
 
 
-####### controller process #############
+####### CGI controller process #############
 
 ## get CGI result
-print "get CGI result ..... "
 form_data = cgi.FieldStorage()
-term = form_data['terms'].value
-query = term.decode("utf-8")
-print "determine if CTU is stored"
-if sql_webModel.checkIfdataIsStore(query,myDB): ## found it in DB
-	onePageTitlesFromSQL,onePageContentsFromSQL,onePageUrlsFromSQL = sql_webModel.get_onePageResultsfromStore(query, 8,myDB)
+term_ascii = form_data['terms'].value
+query = term_ascii.decode("utf-8")
+logger.info('Got the user query %s from fields from index.html' % query)
+
+## Determine if Google pages by the query has been cached in SQLite 
+if sql_webModel.checkIfdataIsStore(query,FILE_SQLITE):
+	logger.info("Found it, use it from the cache to save crawler's time")
+	lTitles_SQL, lContents_SQL, lUrls_SQL = sql_webModel.get_onePageResultsfromStore(query, 8, FILE_SQLITE) ## 8 eight Google web-snippet 
 else:
-	print "not found from store, query Google directly"
-	# "results" are the JSONs list containing each page result FOR ONE QUERY [[ONE PAGE - title,content,url],[ONE PAGE - JSON]]
-	results = sql_webModel.get_googleResult_forClient(term)
+	logger.info("Not found, query through Google Search API directly!")
+	## "results" are the JSONs list containing each page result FOR ONE QUERY [[ONE PAGE - title,content,url],[ONE PAGE - JSON]]
+	lQueried_results_json = sql_webModel.get_googleResult_forClient(term_ascii)
 
 	#for each in results:
 	#	fordiaply = each_jsonPaser(each)
 
-	for each in results:
-		onePageTitles,onePageContents,onePageUrls  = jsonPaserForOnePage(each)
-	dataInStore = False
+	for each_json in lQueried_results_json:
+		lTitles,lContents,lUrls  = myquerypaser.onePageJsonPaser(each_json)
+	DATAINSTORE = False
 
 
-###### strat to render in html-based ###############
+###### start to render in html-based ###############
 
 print(yate.start_response())
-print(yate.include_header("Google search result for " + str(term)))
-print(yate.include_menu({"Are you satisfied? , go back to Google": "/index.html"}, str(term) ))
+print(yate.include_header("Google search result for " + str(term_ascii)))
+print(yate.include_menu({"Are you satisfied? , go back to Google": "/index.html"}, str(term_ascii) ))
 #print(yate.start_form("controller2.py"))
 #print(yate.input_text('terms',str(term)))
 #print(yate.end_form("enter to my app"))
 #print(yate.para("Query for:" + str(term)))
-
 #print("<br /><br />")
 
-if dataInStore:
-	for title, content, url in zip(onePageTitlesFromSQL,onePageContentsFromSQL,onePageUrlsFromSQL):
+if DATAINSTORE:
+	for title, content, url in zip(lTitles_SQL,lContents_SQL,lUrls_SQL):
 		print(yate.render_search_result(title.encode('utf-8-sig'),content.encode('utf-8-sig'),url.encode('utf-8-sig')))
 else:
-	for title, content, url in zip(onePageTitles,onePageContents,onePageUrls):
+	for title, content, url in zip(lTitles,lContents,lUrls):
 		print(yate.render_search_result(title,content,url))
-#mypage = markup.page()
-#mypage.addfooter("fuck you")
-#print (mypage)
 
 
-#print("<button type="button" onclick="alert('Hello world!')">Click Me!</button>")
+
+
 

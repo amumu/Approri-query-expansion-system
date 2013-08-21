@@ -63,4 +63,46 @@ def jsonPaserForOnePage(each_json):
 			urls.append(temp_url)
 		return titles, contents, urls
 
+		
+####################SINGLE QUERY ##########################################
+def onePageJsonPaser(each_json):
+	titles = []
+	contents = []
+	urls = []
+	####### each JSON means each page result in a JSON 
+	for result in each_json['responseData']['results']:
+		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
+		titles.append(temp_title)
+		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
+		contents.append(temp_content)
+		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
+		urls.append(temp_url)
+	return titles, contents, urls
+	
+def each_jsonPaser(each_json):
+	all_result = []
+	for result in each_json['responseData']['results']:
+		each_result = []
+		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
+		each_result.append(temp_title)
+		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
+		each_result.append(temp_content)
+		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
+		each_result.append(temp_url)
+		all_result.append(each_result)
+	return all_result
+	
+def each_jsonPaserUsingDic(each_json):
+	all_result = {}
+	for result in each_json['responseData']['results']:
+		temp_title = urllib.unquote(result['titleNoFormatting']).encode('utf-8')
+		all_result['title'] = temp_title
+		each_result.append(temp_title)
+		temp_content = result['content'].encode('utf-8').strip("<b>...</b>").replace("<b>",'').replace("</b>",'').replace("&#39;","'").strip()
+		each_result.append(temp_content)
+		temp_url = urllib.unquote(result['unescapedUrl']).encode('utf-8')
+		each_result.append(temp_url)
+		all_result.append(each_result)
+	return all_result
+	
 

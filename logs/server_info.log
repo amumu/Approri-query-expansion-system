@@ -1,0 +1,4 @@
+2013-08-22 02:12:56,207 INFO controller1.py started
+2013-08-22 02:13:27,930 INFO controller1.py started
+2013-08-22 02:13:27,930 INFO Got the user query 秘密座機 from fields from index.html
+2013-08-22 02:13:27,933 INFO Found it, use it from the cache to save crawler's time
