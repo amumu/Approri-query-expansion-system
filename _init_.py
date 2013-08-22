@@ -1,4 +1,4 @@
-# Aprori-based query expansion: submodule_load.py
+# Aprori-based query expansion: _init_.py
 #
 # 
 # Author: Paul Yang <paulyang0125@gmail.com>
@@ -9,6 +9,7 @@
 import os
 import sys
 import inspect
+
 
 # realpath() with make your script run, even if you symlink it :)
 cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))

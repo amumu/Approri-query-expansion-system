@@ -5,25 +5,31 @@
 # URL: 
 # For license information, see LICENSE.TXT
 #encoding=utf-8
+
 import cgitb
 cgitb.enable()
-import submodule_load
 import cgi 
 import urllib
 import sql_webModel
 import yate
 import myquerypaser
 import logging
+import config_sectionmap
 
 ########### global ############  ##TODO: use ConfigParser to move them to *.ini
-LOG_PATH = 'logs/server_info.log'
-LOG_LEVEL = logging.DEBUG
-LOG_FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-FILE_SQLITE = 'final.sqlite'
-DATAINSTORE = True 
+
+LOG_PATH = config_sectionmap.ConfigSectionMap("client_one")['log_path']
+FILE_SQLITE = config_sectionmap.ConfigSectionMap("client_one")['file_sqlite']
+DATAINSTORE = bool(config_sectionmap.ConfigSectionMap("client_one")['datainstore'])
+
+
+
 
 ########### logging init ############
 print "initializing the logging" 
+
+LOG_LEVEL = logging.DEBUG
+LOG_FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger('myapp')
 hdlr = logging.FileHandler(LOG_PATH)
 hdlr.setFormatter(LOG_FORMATTER)

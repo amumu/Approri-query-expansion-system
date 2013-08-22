@@ -7,7 +7,6 @@
 #encoding=utf-8
 import cgitb
 cgitb.enable()
-import submodule_load
 import cgi 
 import urllib
 import yate
@@ -16,24 +15,24 @@ import chineseseg
 import sql_webModel
 import ehownet
 import logging
+import config_sectionmap
 
 ##### global parameters #######
 
-FILE_SQLITE = 'final.sqlite'
+FILE_SQLITE = config_sectionmap.ConfigSectionMap("client_one")['file_sqlite']
 NEXT_URL = 'controller3.py'
 
 ########### logging init ############
 logger = logging.getLogger('myapp')
 logger.info('controller2.py started')
 
+####### controller process #############
+
 ## CGI parameter passing 
 form_data = cgi.FieldStorage()
 term_ascii = form_data['terms'].value
 print(yate.start_response())
 print(yate.include_header("Aprori Page for " + str(term_ascii)))
-
-
-####### controller process #############
 
 
 #### get expanded word from SQL, render them and pass through input method to controller 3  #####

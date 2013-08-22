@@ -6,6 +6,7 @@ import cgitb
 cgitb.enable()
 import BaseHTTPServer
 import CGIHTTPServer
+
  ## This line enables CGI error report
 port = 8001
 server = BaseHTTPServer.HTTPServer

@@ -1,11 +1,8 @@
 ﻿#! /usr/local/bin/python3
 import cgitb
 cgitb.enable()
-import sys
 import cgi 
 import urllib
-import os, sys, inspect
-# realpath() with make your script run, even if you symlink it :)
 import yate
 import markup
 import pickle
@@ -14,6 +11,8 @@ import time
 import myquerypaser
 import sql_webModel
 import ehownet
+import config_sectionmap
+import logging 
 
 
 	
@@ -30,16 +29,20 @@ def prepareSegDataForAprori(webQuerryResultPerQuery):
 
 
 	
-##### global paratermters #######
+########### global ############
+FILE_SQLITE = config_sectionmap.ConfigSectionMap("client_one")['file_sqlite']
+NEXT_URL = 'controller4.py'
+#NEXT_URL1 = 'controller5.py'
 
-myDB = 'final.sqlite'	
-the_url = 'controller4.py'
-#the_url1 = 'controller5.py'
+########### logging init ############
+logger = logging.getLogger('myapp')
+logger.info('controller2.py started')
+
+####### controller process #############
 # CGI parameter passing 
 form_data = cgi.FieldStorage()
 expanedWordsList = form_data.getlist("expanded_terms_array")
 
-####### controller process #############
 print(yate.start_response())
 print(yate.include_header("Aprori Results: "))
 #print('<h2>' + "these are the expanded queries" +'</h2>')
@@ -51,22 +54,22 @@ print(yate.include_header("Aprori Results: "))
 
 eqidList = [] 
 for each_word in expanedWordsList:
-	eqidList.append(sql_webModel.getExistedIDFromStore(each_word.decode("utf-8"),myDB))
+	eqidList.append(sql_webModel.getExistedIDFromStore(each_word.decode("utf-8"),FILE_SQLITE))
 
 #print(yate.para(str(eqidList)))
 #### get the candicate 
 candidateDic = {}
 for id in eqidList:
-	candidateDic[id] = sql_webModel.get_theFlagFromAproriByEqid(id,myDB)
+	candidateDic[id] = sql_webModel.get_theFlagFromAproriByEqid(id,FILE_SQLITE)
 
 #print(yate.para(str(candidateDic))) 
 
 candidateList = []
-print(yate.start_form(the_url, form_type="POST"))
+print(yate.start_form(NEXT_URL, form_type="POST"))
 
 for id in candidateDic.keys():
 	if candidateDic[id] == 1:
-		candidateList.append(sql_webModel.get_expannedQueryByQID(id,myDB))
+		candidateList.append(sql_webModel.get_expannedQueryByQID(id,FILE_SQLITE))
 		print(yate.hidden_input('candidateID', str(id)))
 		#print(yate.para(str(candidateList)))  
 
@@ -80,7 +83,7 @@ print ('</br>')
 #print(yate.createLink({"Verbose mode": "/cgi-bin/controller4.py"}))
 print ('</br>')
 
-#print(yate.start_form(the_url, form_type="POST"))
+#print(yate.start_form(NEXT_URL, form_type="POST"))
 
 #### CGI passing for DEBUG page  
 for c in candidateList:
@@ -90,7 +93,7 @@ print(yate.end_form("enter to verbose mode"))
 
 #### CGI passing for final results page 
 
-#print(yate.start_form(the_url1, form_type="POST"))
+#print(yate.start_form(NEXT_URL1, form_type="POST"))
 #for c in candidateList:
 #	print(yate.hidden_input('results', c))
 #print('<h3>' + "View the final results: " +'</h3>')
@@ -106,7 +109,7 @@ print(yate.include_footer({"Done, go back to Google": "/index.html"}))
 #print(yate.u_list(segQuery))
 
 #### get expanded word from SQL 
-#if sql_webModel.checkIfdataIsStore(term.decode("utf-8"),myDB): ## found it in DB
+#if sql_webModel.checkIfdataIsStore(term.decode("utf-8"),FILE_SQLITE): ## found it in DB
 #	expandedQueriesPerDemoList = ehownet.get_allExpannedQueryFromStore(term.decode("utf-8"))
 	### render eexpanded word results #### 
 #	print(yate.para("These are expanded queries: "))

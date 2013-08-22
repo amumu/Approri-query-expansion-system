@@ -2,3 +2,16 @@
 2013-08-22 02:13:27,930 INFO controller1.py started
 2013-08-22 02:13:27,930 INFO Got the user query 秘密座機 from fields from index.html
 2013-08-22 02:13:27,933 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 18:24:05,469 INFO controller1.py started
+2013-08-22 18:24:05,470 INFO Got the user query 飢餓﻿遊戲 from fields from index.html
+2013-08-22 18:36:47,148 INFO controller1.py started
+2013-08-22 18:36:47,148 INFO Got the user query 半夜酒家 from fields from index.html
+2013-08-22 18:37:20,569 INFO controller1.py started
+2013-08-22 18:37:20,571 INFO Got the user query 半夜酒家 from fields from index.html
+2013-08-22 18:37:46,414 INFO controller1.py started
+2013-08-22 18:37:46,414 INFO Got the user query 深夜飲食店 from fields from index.html
+2013-08-22 18:37:57,341 INFO controller1.py started
+2013-08-22 18:37:57,342 INFO Got the user query 秘密座機 from fields from index.html
+2013-08-22 19:27:53,063 INFO controller1.py started
+2013-08-22 19:27:53,084 INFO Got the user query 秘密座機 from fields from index.html
+2013-08-22 19:27:53,085 INFO Found it, use it from the cache to save crawler's time
