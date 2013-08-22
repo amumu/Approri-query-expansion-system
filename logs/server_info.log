@@ -15,3 +15,33 @@
 2013-08-22 19:27:53,063 INFO controller1.py started
 2013-08-22 19:27:53,084 INFO Got the user query 秘密座機 from fields from index.html
 2013-08-22 19:27:53,085 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 20:35:41,999 INFO controller1.py started
+2013-08-22 20:35:42,000 INFO Got the user query 秘密座機 from fields from index.html
+2013-08-22 20:37:12,769 INFO controller1.py started
+2013-08-22 20:37:12,770 INFO Got the user query 秘密座機 from fields from index.html
+2013-08-22 20:37:12,772 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 20:38:02,305 INFO controller1.py started
+2013-08-22 20:38:02,306 INFO Got the user query 你好啊 from fields from index.html
+2013-08-22 20:38:02,308 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 22:24:40,417 INFO controller1.py started
+2013-08-22 22:24:40,417 INFO Got the user query 大人個 from fields from index.html
+2013-08-22 22:24:40,418 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 22:29:52,857 INFO controller1.py started
+2013-08-22 22:29:52,858 INFO Got the user query 大人個 from fields from index.html
+2013-08-22 22:29:52,858 DEBUG response : 
+2013-08-22 22:29:52,858 DEBUG [(u'\u96b1\u5f62\u98db\u6a5f',), (u'\u96b1\u5f62\u98db\u884c\u5668',), (u'\u96b1\u5f62\u5ea7\u6a5f',), (u'\u96b1\u79d8\u98db\u6a5f',), (u'\u96b1\u79d8\u98db\u884c\u5668',), (u'\u96b1\u79d8\u5ea7\u6a5f',), (u'\u6697\u5730\u98db\u6a5f',), (u'\u6697\u5730\u98db\u884c\u5668',), (u'\u6697\u5730\u5ea7\u6a5f',), (u'\u79c1\u5bc6\u98db\u6a5f',), (u'\u79c1\u5bc6\u98db\u884c\u5668',), (u'\u79c1\u5bc6\u5ea7\u6a5f',), (u'\u79d8\u5bc6\u98db\u6a5f',), (u'\u79d8\u5bc6\u98db\u884c\u5668',), (u'\u79d8\u5bc6\u5ea7\u6a5f',), (u'\u9b3c\u795f\u98db\u6a5f',), (u'\u9b3c\u795f\u98db\u884c\u5668',), (u'\u9b3c\u795f\u5ea7\u6a5f',), (u'\u98e2\u9913\ufeff\u904a\u6232',), (u'\u98e2\u9913\u73a9\u6a02',), (u'\u98e2\u9913\u904a\u61a9',), (u'\u98e2\u9913\u5b09\u904a',), (u'\u98e2\u9913\u5b09\u9b27',), (u'\u6328\u9913\ufeff\u904a\u6232',), (u'\u6328\u9913\u73a9\u6a02',), (u'\u6328\u9913\u904a\u61a9',), (u'\u6328\u9913\u5b09\u904a',), (u'\u6328\u9913\u5b09\u9b27',), (u'\u53e3\u71e5\ufeff\u904a\u6232',), (u'\u53e3\u71e5\u73a9\u6a02',), (u'\u53e3\u71e5\u904a\u61a9',), (u'\u53e3\u71e5\u5b09\u904a',), (u'\u53e3\u71e5\u5b09\u9b27',), (u'\u7126\u6e34\ufeff\u904a\u6232',), (u'\u7126\u6e34\u73a9\u6a02',), (u'\u7126\u6e34\u904a\u61a9',), (u'\u7126\u6e34\u5b09\u904a',), (u'\u7126\u6e34\u5b09\u9b27',), (u'\u795e\u529b\ufeff\u5f69\u8272',), (u'\u795e\u529b\u8272\u5f69',), (u'\u795e\u529b\u984f\u8272',), (u'\u795e\u529b\u5f69',), (u'\u5a01\u529b\ufeff\u5f69\u8272',), (u'\u5a01\u529b\u8272\u5f69',), (u'\u5a01\u529b\u984f\u8272',), (u'\u5a01\u529b\u5f69',), (u'\u6df1\u591c\ufeff\u98df\u5802',), (u'\u6df1\u591c\u9152\u5bb6',), (u'\u6df1\u591c\u98ef\u9928',), (u'\u6df1\u591c\u98f2\u98df\u5e97',), (u'\u591c\u6df1\ufeff\u98df\u5802',), (u'\u591c\u6df1\u9152\u5bb6',), (u'\u591c\u6df1\u98ef\u9928',), (u'\u591c\u6df1\u98f2\u98df\u5e97',), (u'\u534a\u591c\ufeff\u98df\u5802',), (u'\u534a\u591c\u9152\u5bb6',), (u'\u534a\u591c\u98ef\u9928',), (u'\u534a\u591c\u98f2\u98df\u5e97',), (u'\u6df1\u66f4\ufeff\u98df\u5802',), (u'\u6df1\u66f4\u9152\u5bb6',), (u'\u6df1\u66f4\u98ef\u9928',), (u'\u6df1\u66f4\u98f2\u98df\u5e97',)]
+2013-08-22 22:29:52,858 INFO Found it, use it from the cache to save crawler's time
+2013-08-22 22:33:39,302 INFO controller1.py started
+2013-08-22 22:33:39,302 INFO Got the user query 阿里山 from fields from index.html
+2013-08-22 22:33:39,303 DEBUG query : 
+2013-08-22 22:33:39,303 DEBUG 阿里山
+2013-08-22 22:33:39,303 DEBUG response : 
+2013-08-22 22:33:39,303 DEBUG []
+2013-08-22 22:33:39,305 INFO Not found, query through Google Search API directly!
+2013-08-22 22:55:10,269 INFO controller1.py started
+2013-08-22 22:55:10,270 INFO Got the user query 你好啊 from fields from index.html
+2013-08-22 22:55:10,272 DEBUG query : 
+2013-08-22 22:55:10,272 DEBUG 你好啊
+2013-08-22 22:55:10,272 DEBUG response : 
+2013-08-22 22:55:10,272 DEBUG []
+2013-08-22 22:55:10,273 INFO Not found, query through Google Search API directly!

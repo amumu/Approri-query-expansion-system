@@ -12,16 +12,17 @@ Usage:
 1.	Jieba is required to be installed in advance (easy_install jieba or pip install jieba)
 2.	Run simple_httpd.py to start the http development server
 3.	Open index.html by any your preferred browser to enter the entry of the system
+4.	Know about the status by checking logs\server_info.log
 
 =============================
 Online Demo in Google Chrome Web Store:
 
-still under construction... but will see it soon
+still under construction...
 
 =============================
 Features: 
 
-1. make use Web Search API to get web snippet from Google index server   
+1. make use of Web Search API to get web snippet from Google index server   
 2. Use Bag of word and TF/IDF for feature exaction
 3. Use Apriori to mine the association rule in a webpage and use eHowbet and a simple weighted scheme to prioritize the rules
 

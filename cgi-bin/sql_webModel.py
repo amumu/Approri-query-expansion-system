@@ -8,6 +8,7 @@ import re, string
 import pickle 
 from itertools import izip
 import string 
+import logging
 
 
 ####### GOLABL PARAMETERS ####################3
@@ -18,7 +19,9 @@ airplaneRef = '../data/ehownet/airplane/'
 comicRef = '../data/ehownet/comic/'
 dramaRef = '../data/ehownet/drama/'
 
-
+########### logging init ############
+logger = logging.getLogger('myapp')
+logger.info('sql_webModel.py started')
 
 
 
@@ -73,11 +76,15 @@ def checkIfdataIsStore(query,db_name):
 	#print "for debug" 
 	#print type(query)
 	#query
+	logger.debug("query : ")
+	logger.debug(query)
 	results = cursor.execute("SELECT qid FROM expand_words WHERE expand_word = ?", (query,))
-	results1 = cursor.execute("SELECT expand_word FROM expand_words")
+	#results1 = cursor.execute("SELECT expand_word FROM expand_words")
 	response = results.fetchall()
 	#print "response : "
 	#print response 
+	logger.debug("response : ")
+	logger.debug(response)
 	#print "all"
 	if len(response) == 0:
 		#print ( "\n")
