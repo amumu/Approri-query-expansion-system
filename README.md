@@ -26,6 +26,10 @@ Features:
 2. Use Bag of word and TF/IDF for feature exaction
 3. Use Apriori to mine the association rule in a webpage and use eHowbet and a simple weighted scheme to prioritize the rules
 
+You can check the slide for detail from: 
+
+http://www.slideshare.net/paulyang0125/web-query-expansion-based-on-association-rules-mining-with-e-hownet-and-google-chrome-extension-release
+
 
 =============================
 Reference:
