@@ -46,7 +46,7 @@ http://en.wikipedia.org/wiki/Apriori_algorithm
 ===============================
 License:
 
-##################################################################################
+
 #                                                                                #
 #  Copyright (c) 2013 Yao Nien, Yang, paulyang0125@gmail.com                     #  
 #  Licensed under the Apache License, Version 2.0 (the "License"); you may not   #
@@ -57,4 +57,4 @@ License:
 #  OF ANY KIND, either express or implied. See the License for the specific      #
 #  language governing permissions and limitations under the License.             # 
 #                                                                                #
-##################################################################################
+
