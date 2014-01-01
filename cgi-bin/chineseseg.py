@@ -1,6 +1,20 @@
+﻿##################################################################################
+#                                                                                #
+#  Copyright (c) 2013 Yao Nien, Yang, paulyang0125@gmail.com                     #  
+#  Licensed under the Apache License, Version 2.0 (the "License"); you may not   #
+#  use this file except in compliance with the License. You may obtain a copy    #
+#  of the License at http://www.apache.org/licenses/LICENSE-2.0. Unless required #
+#  by applicable law or agreed to in writing, software distributed under the     #
+#  License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS  #
+#  OF ANY KIND, either express or implied. See the License for the specific      #
+#  language governing permissions and limitations under the License.             # 
+#                                                                                #
+##################################################################################
+
 #encoding=utf-8
 import jieba, re, string
-testDict = "dict/dict.txt.big"jieba.load_userdict(testDict)
+testDict = "dict/dict.txt.big"
+jieba.load_userdict(testDict)
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 #jieba.set_dictionary(testDict)
@@ -23,7 +37,9 @@ def segmentCTListPerQuerys(list_CT_Query):
 				seglinePerQuery.append(z.word)
 		seglineString = ' '.join(e for e in seglinePerQuery)
 		segCTStringInAQuery.append(seglineString)
-	return segCTStringInAQuery def segmentToListPerQuery(queryString):
+	return segCTStringInAQuery 
+
+def segmentToListPerQuery(queryString):
 	listPerQuery = []
 	segedList = []
 	out1 = re.sub('[a-zA-Z]+', '', queryString)       
@@ -43,7 +59,8 @@ def segmentCTListPerQuerys(list_CT_Query):
 			segedList.append(z.word)
 	return segedList
 
-############# input: referenceFileName, folder contains webqueery result files ####################def segementThroughFile(refFileName, testfolder):
+############# input: referenceFileName, folder contains webqueery result files ####################
+def segementThroughFile(refFileName, testfolder):
 
 	fp7=open(refFileName,"r")
 	data_list = [word.strip() for word in fp7]
